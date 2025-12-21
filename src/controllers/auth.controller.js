@@ -23,7 +23,7 @@ const generateAccessAndRefreshToken = async (userID) => {
 }
 
 const registerUser=asyncHandler(async(req , res) =>{
-    
+
     //taking the data
     const {email , username , password , role } = req.body
 
@@ -58,11 +58,11 @@ const registerUser=asyncHandler(async(req , res) =>{
         subject:"Please verify your email.",
         mailgenContent:emailVerificationMailgenContent(
             user.username,
-            `${req,protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedToken}`   //generating dynamic link
+            `${req.protocol}://${req.get("host")}/api/v1/users/verify-email/${unHashedToken}`   //generating dynamic link
         )
       })
     
-    const createdUser = await user
+    const createdUser = await User
       .findById(user._id)
       .select(
         "-password -refreshToken -emailVerificationToken -dateVerificationToken",
@@ -83,4 +83,4 @@ const registerUser=asyncHandler(async(req , res) =>{
         )
 })
 
-return { registerUser }
+export { registerUser }

@@ -33,7 +33,7 @@ const userSchema = new Schema({
     type: String,
     trim: true,
   },
-  passsword: {
+  password: {
     type: String,
     required: [true, "Password is required."],
   },
@@ -63,15 +63,14 @@ const userSchema = new Schema({
 
 //using prehooks to hash the password before saving the data to DB
 
-userSchema.pre("save",async function(next){
+userSchema.pre("save",async function(){
     //"next" here means go to next hook&"10" means number of hashing rounds
     if(!this.isModified("password")) {
-        return next()
+        return
         //this is to check if the password field is modified or not
     }
     else{
-        this.passsword=await bcrypt.hash(this.passsword , 10)
-        next()
+        this.password=await bcrypt.hash(this.password , 10)
     }
 })
 
