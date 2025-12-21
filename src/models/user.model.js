@@ -77,7 +77,7 @@ userSchema.pre("save",async function(){
 //to check if enters the password for login , is it the same hashed password stored in the DB or not
 
 userSchema.methods.isPasswordCorrect=async function(password){
-    return await bcrypt.compare(password , this.passsword)
+    return await bcrypt.compare(password , this.password)
 }
 
 //to generate the access token
