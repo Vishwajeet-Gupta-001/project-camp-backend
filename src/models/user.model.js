@@ -107,7 +107,7 @@ userSchema.methods.generateRefreshToken=function(){
   );    //this is generation of refresh token
 }
 
-//generating without data token.Usually for verifying user or for password reseting.
+//generating without data token(General/Temporary).Usually for verifying user or for password reseting.
 
 userSchema.methods.generateTemporaryToken=function(){
     const unHashedToken = crypto.randomBytes(20).toString("hex")
